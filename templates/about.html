@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        /* Your CSS styles here */
+    </style>
+    <title>About Slow Burn Music</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg fixed-top" style="background: rgb(214, 14, 221);" data-bs-theme="light">
+            <!-- Navigation bar content (if needed) -->
+        </nav>
+    </div>
+    <div class="player container">
+        <!-- Your existing content (image, audio player, controls, etc.) -->
+        <div class="container">
+            <nav class="navbar navbar-expand-lg fixed-top" style=" background: rgba(10, 10, 139, 0.809);" data-bs-theme="dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand" style="font-size: larger; font-family: Arial, Helvetica, sans-serif;font-weight:700 ; color: rgb(57, 155, 235);" href="{{url_for('index')}}">Slow Burn<i class="bi bi-fire"></i></a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav  mb-2 " style=" color:rgb(55, 6, 100);">
+                    
+                        <li class="nav-item me-3" >
+                            <a class="nav-link danger" aria-current="page" href="{{ url_for('about' )}}">About</a>
+                          </li>
+                      <li class="nav-item ms-3" >
+                        <a class="nav-link danger" aria-current="page" href="{{ url_for('show_login' )}}">Logout</a>
+                      </li>
+                     
+                    </ul>
+                    
+                  </div>
+                </div>
+              </nav>
+            </div>
+        <!-- About Section -->
+        <section id="about" class="mt-5">
+            <h2>About Slow Burn Music</h2>
+            <p>Welcome to Slow Burn Music, a platform designed to enhance your study experience through carefully curated music playlists. Our mission is to provide students with a conducive environment for focused learning by combining the power of music and education.</p>
+            <p>Whether you're into calming melodies, energizing beats, or something in between, Slow Burn Music has a playlist for every study session. Feel the rhythm, stay focused, and make the most of your study time with our handpicked tunes.</p>
+        </section>
+
+        
+        <section id="team" class="mt-5">
+            <h2>Meet the Team</h2>
+            <p>Slow Burn Music is brought to you by a passionate team of developers dedicated to creating a seamless and enjoyable experience. We believe in the power of music to elevate learning, and our goal is to make that experience accessible to students worldwide.</p>
+            
+        </section>
+
+        <!-- Attribution and Footer Section -->
+        <section id="attribution" class="mt-5">
+            <span>Music: </span> <span class="attribution"><a href="https://www.bensound.com"> https://www.bensound.com</a></span>
+            <h6>&copy; 2024 Slow Burn</h6>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Your custom scripts (if any) -->
+
+</body>
+</html>

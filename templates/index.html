@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        :root{
+            --pink: rgba(207, 88, 213, 0.922);
+            --yellow: rgba(208, 170, 1, 0.922);
+            --dark: rgb(67, 67, 64);
+        }
+    html{
+     font-size: 12px;
+     box-sizing: border-box;
+    }
+    body{
+        background: radial-gradient(circle at 10% 20%, rgb(241, 121, 226) 0%, rgb(251, 226, 216) 86.8%);;
+        color: rgb(24, 24, 24);
+        height: 100%;
+        font-size: 1.4rem;
+        margin: 2rem auto;
+        padding-right: 50px;
+        min-height: 100vh;
+        text-align: center;
+    }
+    .player{
+        background: rgb(249, 249, 249);
+        padding: 2rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        text-align: center;
+        margin-top: 93px;
+    }
+    img {
+        width:34%;
+        height: 30%;
+        border-radius: 50%;
+    }
+    #controls{
+        border: 1px var(--pink) solid;
+        padding: 15px;
+        border-radius: 4px;
+    }
+    .controls_wrapper > span{
+        cursor: pointer;
+        color: var(--pink);
+        font-size: 64px;
+        padding: 10px, auto;
+
+    }
+    .controls_wrapper > span:hover{
+        background-color: rgba(31, 54, 138, 0.507);
+        box-shadow: 1px 2px 2px 1px grey;
+    }
+    #currentSong{
+        overflow: hidden;
+
+    }
+    #songList{
+        overflow: hidden;
+        text-align: left;
+    }
+    .nav-item{
+        border: 1px solid rgba(37, 36, 36, 0.669);
+        
+        border-radius: 15px;
+        padding: 1rem;
+    }
+    .nav-item:hover{
+     background-color: rgba(0, 0, 0, 0.796);
+     color: white;
+    }
+    li{
+       
+        cursor: pointer;
+        padding: 1.5rem;
+
+    }
+    li:hover{
+       
+        background-color: rgba(10, 10, 139, 0.417);
+    }
+    @media(min-width: 800px) {
+        body{
+            max-width: 80vw;
+            font-size: 1.8rem;
+
+        }
+        
+    }
+    .attribution > a{
+        color: rgb(158, 27, 176);
+        text-decoration: none;
+    }
+    #currentSong {
+        font-size: 20px;
+       
+    }
+    .progress-bar {
+        width: 95%;
+        height: 10px;
+        border-radius: 15px;
+        border-color: pink;
+        display: block;
+        position: relative;
+        margin-left: 25px;
+        color: lightblue;
+        
+    }
+   
+
+    </style>
+    <title>Slow Burn Music</title>
+</head>
+<body>
+    <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top" style=" background: rgba(10, 10, 139, 0.809);" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="font-size: larger; font-family: Arial, Helvetica, sans-serif;font-weight:700 ; color: rgb(57, 155, 235);" href="{{url_for('index')}}">Slow Burn<i class="bi bi-fire"></i></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav  mb-2 " style=" color:rgb(55, 6, 100);">
+            
+                <li class="nav-item me-3" >
+                    <a class="nav-link danger" aria-current="page" href="{{ url_for('about' )}}">About</a>
+                  </li>
+              <li class="nav-item ms-3" >
+                <a class="nav-link danger" aria-current="page" href="{{ url_for('show_login' )}}">Logout</a>
+              </li>
+             
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+    </div>
+   <div class="player container">
+    
+        <img src="{{url_for('static', filename='pictures/1.jpg')}}" alt="lofi_girl">
+    
+    <audio id="player" ontimeupdate="updateProgress()" >
+        <source id="source" />
+        Audio not Supported
+    </audio>
+    <progress class="progress-bar" id="progress" value="0" max="100" min="0"></progress>
+    
+   
+
+    <div id="controls">
+        <p id="currentSong"></p>
+        <div class="controls_wrapper">
+            <span onclick="playAudio()">&#9658;</span>
+            <span onclick="pauseAudio()">&#10074;&#10074;</span>
+        </div>
+        <p>Volume</p>
+        <div class="volumewrapper">
+            <span>-</span>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" >
+            <span>+</span>
+        </div>
+    </div>
+    <h2>My Songs</h2>
+    <div id="songList">
+        
+    </div>
+    <span >Music: </span> <span class="attribution"><a  href="https//www.bensound.com"> https//www.bensound.com</a></span>
+      <h6> &copy; 2024 Slow Burn</h6>
+</div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        
+        
+        const player = document.getElementById('player')
+        const songs = [
+            "dreams.mp3",
+            "ukulele.mp3",
+            "melancholylull.mp3",
+            "sleepless.mp3",
+            "elevate.mp3"
+        ];
+        function createSongList(){
+            const list= document.createElement('ol');
+            for(let i =0; i < songs.length; i++){
+             const item = document.createElement("li");
+             item.appendChild(document.createTextNode(songs[i]));
+             list.appendChild(item);
+            }
+            return list;
+        }
+        const songlist = document.getElementById('songList')
+        songlist.appendChild(createSongList());
+
+        songlist.onclick = function(e){
+            const source = document.getElementById('source')
+            source.src = "static/songs/"+e.target.innerText;
+
+            document.getElementById('currentSong').innerText = `Now Playing: ${e.target.innerText}`;
+
+            
+            player.load();
+            player.play();
+        };
+
+        function playAudio(){
+          if (player.readyState){
+            player.play();
+          }
+        }
+        function pauseAudio(){
+            if (!player.paused) {
+                player.pause();
+            }
+        };
+        const slider = document.getElementById('volumeSlider');
+        slider.oninput = function(e) {
+            const volume = e.target.value;
+            player.volume = volume;
+        };
+        function updateProgress(){
+            const progressBar = document.getElementById('progress');
+             progressBar.value = (player.currentTime / player.duration) * 100;
+
+             progressBar.addEventListener('click', (event) => {
+            const clickX = event.clientX - progressBar.getBoundingClientRect().left;
+            const advance = (clickX / progressBar.clientWidth) * 100;
+            player.currentTime = (advance / 100) * player.duration;
+        });
+
+        // Update progress bar during playback
+            player.addEventListener('timeupdate', updateProgress);
+
+             
+        };
+    
+
+    </script>
+</body>
+</html>
